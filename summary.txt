@@ -1,0 +1,73 @@
+
+  Summary about week 1 day 1
+    Amazon Web Services
+
+
+
+            Cloud Infrastructure
+
+The cloud infrastructure amazon web services has and likely other cloud Services
+Work by using regional zones for quick availability.
+A regional zone will typically be defined like "us-east"
+
+Within that regional zone there are availability zones.
+A availability zone will be typically defined like "A"
+
+Together to specify an availability zone within a regional zone you would say "us-east-A"
+You can have multiple availability zones within a region so it can be us-east-A, us-east-B and us-east-C
+
+ If you need low latency you can have a local zone that is designed to be an on site or near site
+ way to increase speeds.
+
+ Here is a little diagram to show how it looks
+
+    Cloud System (AWS)
+       |
+   Regional Zone (us-east)
+      |
+   Availability Zone (A)
+
+There are also edge locations for very fast speeds to increase access to the cloud.
+It works by finding the closest physical location to the client who is fetching the data.
+
+
+
+
+           AWS Features And Services
+
+
+EC2 is a way to quickly create already configured virtual machines
+Also known as instances and they can be paused and ran on demand
+this is paid by the hour but you can also reserve resources
+
+Reserved instances are instances that are reserved ahead of time and used when you know how much RAM and storage you will need.
+It can be cheaper because of the planned longer term choice of using it.
+
+Spot instances are instances that can be purchased through bidding and can be very cheap
+because of high discounts. It is not a good idea to use this for anything serious
+but it can be good for testing and smaller things.
+
+
+Understanding Soft and Hard Limits
+
+Soft limit - limitations dictated by the service provider
+             You could submit a ticket and request more
+
+Hard limit - Limitations dictated by the physical limitations of the provider
+             They have finite resources so asking for more than that limit is not possible.
+
+
+AWS Organizations
+ Used to manage multiple accounts
+ This has "SCP" built in from what I learned or known as "Service Control policy's"
+
+AWS Control Tower
+ Used for Management of multiple accounts and servers
+ Has an SDK for automated management
+ + Terraform is a tool that also does similar things to this from what I understand
+
+AWS Service Catalog
+ Management of resources and useful for installing patches across systems
+
+Cloud Trail
+ Used to monitor the API this can be important for viewing bugs or malicious actors
