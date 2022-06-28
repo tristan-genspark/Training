@@ -12,8 +12,9 @@ not be possible otherwise.
 Each subnet can be assigned a avalability zone and this can be useful physical location making 
 it have lower latency for a location.
 
-Subnets within the VPS can have low latency communication with eachother through VPC peering.
-Though if you do configure two subnets for VPC peering it is important to have different subnet ranges.
+Subnets within the VPS can have low latency communication with eachother even through they may be in different zones.
+
+Multiple VPCs can be connected through VPC peering but it is important to have different subnet ranges.
 
 There are multiple security components built in to configuring a VPC.
 There is ACL that controls the virtual network layer and then there are security groups that 
@@ -23,13 +24,12 @@ Internet Gateways can be used to give your VPC access to the public internet.
 
 Nat gateways can be used for subnets that are private to get access to the internet.
 
-
-   [  Virtual Private Cloud ]
+                                
+   [  Virtual Private Cloud ]===============[Another Virtual Private Cloud]
      |              |
      |              |
- [Subnet 1]=====[ Subnet 2]
-  us-east-B  ^    us-west-A
-             connected through VPC Peering
-    
+ [Subnet 1]    [ Subnet 2]
+  us-east-B       us-west-A
+              
 
  
