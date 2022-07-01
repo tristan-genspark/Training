@@ -1,0 +1,51 @@
+
+Create VPC with this IP Address range  10.0.0.0/16
+
+Create a subnet for public with this IP Address range - 10.0.1.0/24 
+Create a subnet for public with this IP Address range - 10.0.2.0/24
+
+While I am lacking in knowledge of subnet IP range specifications 
+I learned that the smaller the number at the end the larger the number of ip's
+The two subnets they have to be smaller ranges than the main vpc 
+
+Make route tables now
+set the publiuc route table to VPC
+set the private route table to VPC
+
+Create Internet Gateway by going to the VPC
+then going to Internet Gateways and then go to Actions and select Attach to VPC
+
+Go back to public route table 
+Then edit it to support 0.0.0.0/0 for internet gateway
+Then for the target choose internet gateway and select the newly create gateway
+This will create an internet gateway for the public subnet where the webserver will be accessable
+
+Attach Subnets to Routtables
+Subnet > Actions > Edit Route Table Association
+
+Go to the route tables and find the public route table
+Actions > Set main route table
+
+Then the important part to connect the subnets together is to to set the 
+correct policy.
+
+  ( THIS PART BELOW IS UPDATED AND WORKS)
+Get default security group of the RDS Database
+sg-07f4a56d43881d8b4
+
+Go to EC2 And locate its security group
+Edit inbound rules and set "all traffic" and add the database security group
+
+
+
+
+
+
+
+
+
+
+
+
+
+
