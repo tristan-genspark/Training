@@ -1,0 +1,13 @@
+git clone URL
+
+cd repo folder
+git status
+
+
+git add "Folder or File name here or . for all files"
+
+To update changes in a directory
+git commit -am "test"
+git push
+
+
