@@ -16,8 +16,8 @@
 
 provider "aws" {
 region = "us-east-1"
-access_key = "AKIA4LSI336NI6SRNJMW"
-secret_key = "pAlgpmP/Y7Ixeljduuz4r8kYvTDXlpVP685QgRX4"
+access_key = "put your access key here"
+secret_key = "put your secret key here"
 }
 
 variable "labname" {
