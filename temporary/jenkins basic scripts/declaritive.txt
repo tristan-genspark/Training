@@ -1,0 +1,23 @@
+//
+// Jenkins Example to determine the platform the code is running on
+//
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+        echo 'Building....'
+        }
+        stage('Test') {
+            steps {
+            echo 'Testing....'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
