@@ -12,7 +12,7 @@
 // Create Ec2: https://github.com/bugbiteme/demo-tform-aws-vpc/blob/master/modules/ec2/main.tf
 // Example of Terraform by Trainer: https://github.com/devopshubproject/ec2-jenkins-tf
 // Setting Route Table: https://stackoverflow.com/questions/51852034/terraform-aws-how-to-add-default-route-to-vpc-default-route-table
-//
+//                        
 
 provider "aws" {
 region = "us-east-1"
