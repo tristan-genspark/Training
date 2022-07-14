@@ -1,0 +1,11 @@
+node {
+  stage('Learning') {
+    if (isUnix()) {
+    echo 'Running from Linux'
+     }
+     else {
+     echo 'Running from Windows'
+     }
+  }
+
+}

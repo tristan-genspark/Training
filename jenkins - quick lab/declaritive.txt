@@ -7,18 +7,11 @@ pipeline {
 
     stages {
         stage('Build') {
-
-           if (isUnix()) {
-           echo 'Running from Linux'
-            }
-            else {
-            echo 'Running from Windows'
-            }
-
+        echo 'Building....'
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+            echo 'Testing....'
             }
         }
         stage('Deploy') {
