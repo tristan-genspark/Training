@@ -1,0 +1,30 @@
+//
+// Jenkins Example to determine the platform the code is running on
+//
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+
+           if (isUnix()) {
+           echo 'Running from Linux'
+            }
+            else {
+            echo 'Running from Windows'
+            }
+
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
