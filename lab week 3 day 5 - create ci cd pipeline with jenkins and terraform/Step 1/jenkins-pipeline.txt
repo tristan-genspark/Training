@@ -53,11 +53,11 @@ pipeline {
 
                 // Push to AWS ECR
                 bat "docker push ${ectURL}:latest"
-
                 // Issues exsist while attempting to upload this container
                 // Authentication fails though it works fine on the terminal
                 // Likely an issue working inside jenkins with commands - need to resolve
-
+                // error "no basic auth credentials"
+ 
                 // Remove the created image locally
                 bat "docker image rm ${dockerImage}"
 
