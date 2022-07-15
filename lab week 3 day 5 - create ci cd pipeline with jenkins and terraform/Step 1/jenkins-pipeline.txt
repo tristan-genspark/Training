@@ -1,0 +1,69 @@
+
+pipeline {
+      environment {
+          buildDirectory = "C:\\Users\\Tristan\\Documents\\New Job\\Training\\Week 3\\Friday Lab - CICD Pipelines\\Step 1\\Build-Server"
+
+          dockerImage = "http-py-server" // docker image name
+
+          ectURL = "849482604442.dkr.ecr.us-east-1.amazonaws.com/test-repository-for-jenkins" // repository to push the container to
+
+    }
+    agent any
+
+    stages {
+        stage('Build') {
+
+            steps{
+                echo 'Building....'
+
+                // Set the build directory
+                dir("${buildDirectory}") {
+
+                // Build the docker container
+                bat "docker build --no-cache -t ${dockerImage} ."
+            }
+
+            }
+
+        }
+        stage('Test') {
+            steps {
+            echo 'Beginning Testing....'
+
+            // Run the docker container
+            bat "docker run -d -p 8081:80 ${dockerImage}"
+
+            // A simple test using inline python to show how a test can be done
+            // output can be handled later and the pipeline can be haulted if the tests fail
+            bat "python \"${buildDirectory}\\..\\run-server-test.py\""
+
+                        // Kill the docker container
+                        bat "\"${buildDirectory}\\..\\stop-container.bat\""
+            }
+        }
+        stage('Deploy') {
+            steps {
+
+                echo 'Deploying....'
+
+                script{
+
+                // Tag the latest build of the container
+                bat "docker tag ${dockerImage}:latest ${ectURL}:latest"
+
+                // Push to AWS ECR
+                bat "docker push ${ectURL}:latest"
+
+                // Issues exsist while attempting to upload this container
+                // Authentication fails though it works fine on the terminal
+                // Likely an issue working inside jenkins with commands - need to resolve
+
+                // Remove the created image locally
+                bat "docker image rm ${dockerImage}"
+
+                }
+
+            }
+        }
+    }
+}
