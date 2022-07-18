@@ -1,0 +1,326 @@
+Duration: 4 hours
+Python / Java    Basic
+Due - Week 3
+
+
+-----------------------------------------------------------------
+
+
+
+Topic is  - Python And Java 
+
+What is Python
+
+- Its a popular high level language great for writing scripts
+  and automation tools it can be used in a wide range of applications
+
+  Real world Applications of Python 
+
+   > Web frameworks  Django, Flask
+
+   > Automated Scripting
+
+         Clean up files on a remote server and automate uploading and installation of some tool and run it
+
+         Testing websites through headless browsers
+
+   > Machine Learning 
+
+   > Data Analysis
+
+   > Scenrios where python may run on emebded systems
+
+Its an interpreted language
+
+ - This means it requires an interpreter on the computer to read and execute the code
+   > if it does not exist the code wont be able to run
+   This is different than a compiled language that creates a binary file that is native and will
+   load machine code in to memory and immediately execute
+
+ - This means its slower        (but for most tasks it should be still fast)
+   > Its converted from human readable language to byte code each time its ran
+
+ - You can directly edit the code that will run by opening the file
+   > Useful for quick script development
+
+Why is python great?
+
+ - Python code can be written and running within less than a minute
+
+ - Its easy to read
+
+ - Its great for automation
+
+ - It has huge support for libraries and a large standard library
+
+What is Java
+
+  - Its also popular high level programming language with a wide range of support for devices
+
+    Real world Applications of Java
+  
+     > Development of Apps for android devices
+
+     > Back end for webservers - Apache Tomcat takes advantage of java 
+
+     > Desktop Software - Good for Graphical Interfaces
+    
+
+Java uses JIT Compiling
+
+ - This means it turns the code in to a type of universally readable byte code that java can later convert to architechture specific machine code.
+
+ - This means its not fully compiled in to machine code your computer can read
+   > this makes it slower than compiled languages but portable
+
+Why is Java great?
+
+ - JIT Comping enables it to have the speed advantage while also having the advantage of being platform specific.
+
+ - Javas marketing and popularity has resulted in it being on many devices from phones to TV's and more
+
+
+What is the benefit of high level languages like java and python?
+
+
+ Will be using C as an example of a non high level language
+ Its been around since the 70s and its amazing and used heavily still in operating systems
+
+
+ - You don't need to worry about pointers in Python or Java
+
+   > Pointers are variables that can store addresses to other locations in memmory
+     It can point to other variables function locations  entry points for code 
+
+   > Pointers can be very useful and even required for lower level development
+
+   > But not dealing with them reduces vulnerabilities and bugs
+
+
+ - Garbage Collection
+
+    It automatically manages allocation and deallocation of memory during runtime
+
+    Reduces concern about causing memmory leaks
+
+    Older languages can cause memory leaks and result in a program taking up all the resources over time
+
+    Allocating memmory but not releasing it back 
+
+ - Reduced chances of buffer overflow due to higher level functions and methods
+   scanf() in C is a good example of the opposite of this
+    > A function used for getting input
+    > It can create opportunity for buffer overflow vulnerabilities if input is not handled properly
+
+ - Arhcitechture Indepdendent meaning you do not need to worry about the size of variables
+
+    > Example: In python the developer does not need to worry about defining types
+      you can handle integers that have 100 trailing zeros in length
+      50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
+      In C++ you have to be aware of the type for storing the values in
+        -> char 1 byte   Range is  0-255
+        -> int 4 bytes   Range is -32,767-32,767
+        -> unsigned int 4 bytes  Range is  0 to 65,535
+        -> long int               -2,147,483,647 - 2,147,483,647
+        -> unsigned long int       0 to 4,294,967,295
+        -> long long 8 bytes        -9,223,372,036,854,775,807 to 9,223,372,036,854,775,807
+        -> unsigned long long      0 to 18,446,744,073,709,551,615   18 trailing zeros at the end of it
+
+
+
+ - Platform Independent
+
+   > Meaning.... it can be developed for windows, Mac OS and Linux with less concern for importing and dealing with system libraries
+
+   > A good example is network communication through sockets.
+
+     In a higher level language the socket communication is likely abstracted and not platform specific.
+
+     This can be seen in python as well as java
+
+     If your writing code for socket communication using C you will need to write the code to handle windows and linux differences
+
+   > Another example is python and java have built in libraries for listing files in a directory
+
+     Example to show for python -  https://www.geeksforgeeks.org/python-list-files-in-a-directory/
+     Example to show for java   -  https://www.javatpoint.com/list-all-files-in-a-directory-in-java
+
+     in C there is no standard built in library for listing files so you will need to platform specific code
+
+  Another note  - Memmory is less of a luxury in these high level languages
+
+
+In short - you worry less about the machine the code will run on
+
+
+
+        GO TO CODE AND SHOW EXAMPLES NOW 
+-----------------------------------------------------------------
+
+
+
+       ------------[  Types  ]------------
+
+
+
+ Types are containers for variables
+ Just as Math has variables for numbers
+
+ Different Types exsist to store these different values
+
+  > You can store strings of text  in types called strings
+
+  > You can store numbers in types called integers
+
+  > You can store numbers with decimals in types called float
+
+  > You can store true and false values in types called boolean or bool
+
+
+       ------------[  If statement  ]------------
+
+
+If statements determine the flow of code
+
+They work by checking if something is true or false
+
+You can use if statements to determine many things but
+it all results in it checking if its true or false
+
+
+       ------------[  Loops  ]------------
+
+
+Loops are ways to repeat code a given number of times
+
+ - Make a light blink 5 times
+
+ - Print out text multiple times
+
+ - run a piece of code infinitely
+
+It can also be used to iterate through different forms of data
+
+ - Iterate files
+
+ - Iterate through a list of values
+
+ - Iterate detected urls within a webpage
+
+
+       ------------[  Lists and Arrays   ]------------
+
+
+Lists are also a type
+They are just a more complex data structure
+
+ > called lists in python
+ > called array lists in java
+
+May be small differences between languages and termonology
+For simplicity just to understand the basic concept we can say Arrays and Lists are the same
+
+How does it work / what is it
+
+   > Its like a list of data or variables
+
+     - You can have a list of numbers
+
+     - You can have a list of names using the string type
+
+     - You can have a list of complex data structures / objects
+
+   > It can be modified to change a variable within the list
+
+   > new variables can be appended or pushed on to the list
+
+   > Good example of it is for recording the data of a heart beat for 60 seconds
+
+     new data about each heart beat can be added to this list of data  and it can be
+
+     iterated afterwards to analize
+
+ How it really works
+  > Lists store the data along with the address of the next variable within the list
+  Example image - https://static.javatpoint.com/interview/images/linkedlist.png
+
+
+With lists and arrays and other iterateable data structures you start
+with the index of 0 and not 1
+
+
+       ------------[  Functions   ]------------
+
+Functions are recallable sections of code
+ Example
+  > you want to write code that checks the temperature every 3 minutes for 1 day
+    You wouldnt write the code 480 times
+    You write it once and call it 480 times through out the day
+
+ Why are functions useful
+  - Make code abstracted for simplicity
+    It helps prevent messy code
+  - Make code reuseable
+
+  A function consists of
+  - Arguments as Passable Values  INPUT
+  - a value returned to the calling code
+
+  In python you do not need to specify a type for the function to return
+  In  java you need to specify a return type
+    > If you make a function to add 2 numbers together you need to return an integer type
+    
+
+
+       ------------[  Importing   ]------------
+
+Importing can load external code in to a program to be used
+
+This makes it possible to have reuseable code 
+
+
+Importing can be for a local file within the same directory
+or for a library/module on your computer
+
+
+
+       ------------[  Classes and Objects   ]------------
+
+ Classes are ways to create templates for storing variables in
+
+ They also can store functions that can interact with these stored variables
+
+ A class is like blueprints of a car
+ just because you have the blueprints does not mean you have the car
+
+ Two cars from the same blueprint have many differing things
+ one could be red one could be low on fuel
+
+ an object is the living form of a blueprint with values of data that can change
+ and represent things
+
+ A practical use of an object is std::string in c++
+ it stores the string length  and an array of chars
+ it also has methods like std::string::find() to find substrings
+ when you create a string you are creating an object
+
+
+ Methods are just functions that are embeded within classes and can be called
+ from the created objects 
+
+
+
+
+Lab 1 
+ Create a Class 
+  > That Has 2 methods one stores a gievn value in the object one will print it to the console if called
+  > Create 5 objects with different data in each one
+  > Add these objects to a list
+  > Iterate the list using a loop and print out the values stored in the objects
+
+Lab 2
+ - Iterate files and read them to the console
+   > Must Call a function within a loop 
+   > Load the contents to a string and then print to console
+
+
