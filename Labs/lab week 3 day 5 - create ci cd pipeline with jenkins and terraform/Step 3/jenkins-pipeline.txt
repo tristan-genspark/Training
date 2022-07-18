@@ -1,0 +1,82 @@
+
+pipeline {
+      environment {
+          buildDirectory = "C:\\Users\\Tristan\\Documents\\New Job\\Training\\Current Week notes and labs\\Friday Lab - CICD Pipelines\\Step 1\\Build-Server"
+
+          terraformDirectory = "C:\\Users\\Tristan\\Documents\\New Job\Training\\Current Week notes and labs\\Friday Lab - CICD Pipelines\\Step 3\\terraform";
+
+          terraformpath = "C:\\Program Files (x86)\\Terraform\\"
+
+          dockerImage = "http-py-server" // docker image name
+
+          ectURL = "849482604442.dkr.ecr.us-east-1.amazonaws.com/test-repository-for-jenkins" // repository to push the container to
+
+    }
+    agent any
+
+    stages {
+        stage('Build') {
+
+            steps{
+
+                // Set the build directory
+                dir("${buildDirectory}") {
+                echo 'Building the docker application ....'
+                //bat "docker build --no-cache -t ${dockerImage} ." // Build the docker container
+                }
+
+                // Set the directory for terraform
+                dir("${terraformDirectory}") {
+                echo 'Preparing the Infrastructure ....'
+                bat "\"${terraformpath}terraform\" init"
+                bat "\"${terraformpath}terraform\" plan -out=plan1"
+                }
+
+            }
+
+        }
+        stage('Test') {
+            steps {
+            echo 'Beginning Testing....'
+
+            // Run the docker container
+            //bat "docker run -d -p 8081:80 ${dockerImage}"
+
+            // A simple test using inline python to show how a test can be done
+            // output can be handled later and the pipeline can be haulted if the tests fail
+            //bat "python \"${buildDirectory}\\..\\run-server-test.py\""
+
+            // Kill the docker container
+            //bat "\"${buildDirectory}\\..\\stop-container.bat\""
+            }
+        }
+        stage('Deploy') {
+            steps {
+
+                echo 'Deploying....'
+
+
+                // Set the directory for terraform
+                dir("${terraformDirectory}") {
+                echo 'Creating Terraform Infastructure ....'
+                bat "\"${terraformpath}terraform\" apply --auto-approve"
+                }
+
+                // Tag the latest build of the container
+                //bat "docker tag ${dockerImage}:latest ${ectURL}:latest"
+
+                // Push to AWS ECR
+                //bat "docker push ${ectURL}:latest"
+
+                // Issues exsist while attempting to upload this container
+                // Authentication fails though it works fine on the terminal
+                // Likely an issue working inside jenkins with commands - need to resolve
+
+                // Remove the created image locally
+                //bat "docker image rm ${dockerImage}"
+
+
+            }
+        }
+    }
+}
