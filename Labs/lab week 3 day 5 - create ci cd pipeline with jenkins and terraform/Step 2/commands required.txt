@@ -1,0 +1,6 @@
+
+Installing docker is required on the Ec2
+
+
+sudo yum install -y docker
+sudo service docker start

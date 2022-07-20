@@ -6,7 +6,6 @@ provider "kubernetes" {
      cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
 }
 
-
 module "eks" {
     source = "terraform-aws-modules/eks/aws"
     version = "17.1.0"

@@ -4,10 +4,16 @@ cd repo folder
 git status
 
 
-git add "Folder or File name here or . for all files"
+# To update changes in a directory or file or all files
+git add "main.cpp"
+git add "documentation"
+git add . 
 
-To update changes in a directory
-git commit -am "test"
+git commit -am "Some note"      
+
 git push
+
+To update the local files
+git pull
 
 

@@ -1,7 +1,7 @@
 
 pipeline {
       environment {
-          buildDirectory = "C:\\Users\\Tristan\\Documents\\New Job\\Training\\Current Week notes and labs\\Friday Lab - CICD Pipelines\\Step 1\\Build-Server"
+          buildDirectory = "C:\\SomePath\\To\\Build-Server"
 
           dockerImage = "http-py-server" // docker image name
 
