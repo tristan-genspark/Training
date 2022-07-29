@@ -5,10 +5,8 @@ sudo systemctl start httpd
 
          Try this first it may work
 
-yum install php
-amazon-linux-extras install php7.4
-
-sudo systemctl restart httpd
+sudo yum install php -y
+sudo amazon-linux-extras install php7.4 -y
 
 
            installing SQL now
@@ -27,6 +25,9 @@ sudo nano /etc/php.d/mysqli.ini
 # cat /etc/php.d/mysqli.ini 
 ; Enable mysqli extension module
 extension=mysqli.so
+
+
+sudo systemctl restart httpd
 
 
 

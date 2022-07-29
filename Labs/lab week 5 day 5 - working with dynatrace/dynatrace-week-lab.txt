@@ -1,0 +1,55 @@
+1) Create a simple 2 node eks cluster and configure it also the SG
+install Dynatrace agent on the nodes using kubernetes options
+Create a simple dashboard on the Dyntrace potal to check the status of the cluster
+
+Complete!
+
+I created an EKS and nodes within it
+I made sure to add the ssh option for the node group at the last step during the node group creation.
+
+Then I went to AWS and opened up the cloud shell
+and connected to the EKS just created with this command
+aws eks --region us-east-2 update-kubeconfig --name Training_DynaTrace_EKS
+
+I then create an agent on dynatrace and createed it as an openshift Agent
+once creating the agent I made sure to select Kubernetes instead of openshift
+and then I downloaded the dynakube.yaml file
+
+Within the cloud shell I went to Actions then selected Upload File
+and upload the dynakube.yaml file
+
+One I did that I copied and pasted the commands it says to from the agent page on dynatrace
+
+I had issues setting up this part before but after creating the nodegroup again with
+clean security group rules the issue went away.
+
+2) Deploy a simple application on k8s by creating different namespace and ensure the
+application is monitored and dashboard and simple alerts are created
+
+Complete!
+
+I created nginx as the simple application on kubernetes within a namespace named test
+
+ aws eks --region us-east-2 update-kubeconfig --name New-Cluster-1
+ kubectl create namespace test
+ kubectl run nginx --image=nginx -n test
+
+ I was able to create an alert for the clusters memory if it exceeds 60%
+ I was limited to the options I saw available so I was not sure if I could set CPU usage.
+
+3) Deploy a simple web application on eks and synthetic monitoring
+
+Created Nginx on the cluster using kubectl
+kubectl run nginx --image=nginx
+
+I had difficulties getting the nginx visible from the internet
+
+4) Deploy a simple web application on ec2 and synthetic monitoring
+ Complete!
+
+I went to Synthetic Monitoring
+from the synthetic section chart I selected Create a Synthetic Monitor
+and then selected Create a browser monitor
+after that I entered the URL to the website I created on EC2
+then I set the rate to be the default 15 minutes.
+I was able to see the webpage show up on the dynatrace interface.
