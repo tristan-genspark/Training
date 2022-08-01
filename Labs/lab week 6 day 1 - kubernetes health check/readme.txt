@@ -40,7 +40,7 @@ then I uploaded it to the cloud shell using the built in upload feature
 
 Add the code from the "TCP liveness probe" section found here to the file
 https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
-as seen below
+as seen below, I did change the ports to 80 instead of 8080
 
 apiVersion: v1
 kind: Pod
@@ -53,15 +53,15 @@ spec:
   - name: goproxy
     image: k8s.gcr.io/goproxy:0.1
     ports:
-    - containerPort: 8080
+    - containerPort: 80
     readinessProbe:
       tcpSocket:
-        port: 8080
+        port: 80
       initialDelaySeconds: 5
       periodSeconds: 10
     livenessProbe:
       tcpSocket:
-        port: 8080
+        port: 80
       initialDelaySeconds: 15
       periodSeconds: 20
 
