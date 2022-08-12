@@ -1,0 +1,97 @@
+This will take a very long time running from scratch because
+the logging is very slow 
+
+adding AWS to splunk
+
+go to Add Data
+
+then select Cloud computing and choose the AWS service to connect to
+
+
+( - Works - )  
+Now to configure AWS for Billing
+
+Go to S3 and create a bucket
+uncheck "Block all public access" 
+
+Go to billing
+
+Go to Billing Preferences
+
+Check Receive Billing Alerts
+
+Go to Detailed Billing Reports [Legacy]
+and check the option to turn on the detailed billing reports features
+
+Then within that same section configure the S3 bucket for it to report to the S3 bucket created
+
+
+If AWS Plugin is not installed on Splunk
+#
+# Go to Splunks Web Panel
+#  
+# Go to "+ Find More Apps" and search for AWS
+#
+# Install the "Splunk Add-on for Amazon Web Services (AWS)"
+# 
+# Once its installed go back to the home page of the splunk panel
+#  
+# Then go to Splunk Add-on for AWS and go to configuration
+#
+# Add an AWS account by going to Configuration and add a user with programatic access
+# that has the secret key and administrator access 
+#
+#
+
+Now to configure Splunk
+
+Now go to Add Input then Create Billing 
+
+choose the AWS account for accessing and select the S3 Bucket
+
+It may take 2-3 hours
+
+
+
+( - Works - )
+Now to configure AWS for S3 Access Logging
+
+Go to the bucket
+
+Go to properties
+
+Go to Server access logging and edit it to be enabled
+
+Then choose the bucket where you want to log the file to
+
+Make sure its a different bucket and that its in the same region
+
+
+
+
+Now creating a search string for billing
+
+source="s3://*billing*" | search NOT "\"Cost\""="\"0.0000000000\"" | search NOT "\"Cost\""="\"*-*\"" AND NOT \"UsageEndDate\"=\"\" | table \"ProductName\",\"Operation\",\"RecordId\",\"InvoiceID\",\"Cost\",\"UsageEndDate\" | sort - _time | top 10
+
+This search command will list the last 7 recent entries of finalized charges within within billing that are not 
+equal to 0 and formats it in to a table arranged by the most recent entries
+
+Some cost values were a date value instead of a number so this was filtered out.
+
+I could not figure out how to remove the '\"' quotes in the raw data to therefore use the cost amount for graphs
+
+
+
+Now creating a search string for bucket monitoring
+
+source="s3://*" | search "monitored-bucket" | table RequestID, BucketName, HTTPMethod, RemoteIp, RequestURIPath, BytesSent | head 5
+
+This search command will list the last 5 requests to the monitored bucket
+It displays information about the request like the request type and the path as well as the number of bytes sent
+
+
+
+
+
+
+
