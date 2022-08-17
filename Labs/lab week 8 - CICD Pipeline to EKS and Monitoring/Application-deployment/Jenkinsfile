@@ -1,0 +1,45 @@
+
+
+pipeline {
+      parameters {
+        string(name: 'deploymentName', defaultValue: 'nginx-deployment', description: 'Enter the Name for the Pod that will be deployed')
+        string(name: 'servicePort', defaultValue: '80', description: 'Enter the port for the service to listen on')
+      }
+
+    agent any
+
+    stages {
+        stage('Create Deployment') {
+          steps {
+              echo "Deploying the Application \"${params.deploymentName}\" ...."
+
+              sh "kubectl create deployment ${params.deploymentName} --image=nginx --port=${params.servicePort}"
+          }
+        }
+
+
+        stage('Expose Deployment') {
+          steps {
+              echo "Configuring The Aplication to have port ${params.servicePort} exposed ...."
+
+              sh "kubectl expose deployment ${params.deploymentName}  --type=ClusterIP  --name=nginx-service-cluster-ip"
+              sh "kubectl expose deployment ${params.deploymentName}  --type=NodePort  --name=nginx-service-nodeport"
+              sh "kubectl expose deployment ${params.deploymentName}  --type=LoadBalancer  --name=nginx-service-loadbalancer"
+          }
+        }
+
+        stage('Deployment Complete') {
+          steps {
+            echo "- - - - - - - - - - - - - - - "
+            echo "   Deployment is Complete"
+            echo "Pod Name: ${params.deploymentName}"
+            echo "Service Name: ${params.servicePort}"
+            echo "- - - - - - - - - - - - - - - "
+          }
+        }
+
+
+
+
+    }
+}

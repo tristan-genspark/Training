@@ -1,0 +1,49 @@
+pipeline {
+
+      parameters {
+        string(name: 'planName', defaultValue: 'infastructure-plan-release', description: 'Enter the plan name for the terraform deployment')
+        string(name: 'terraformDir', defaultValue: '/usr/ec2-user/terraform', description: 'Enter the port for the service to listen on')
+      }
+
+    agent any
+
+    stages {
+
+    stage('Initialize Terraform') {
+      steps {
+
+        echo "Initializing Terraform ...."
+        dir("${params.terraformDir}")
+        {
+          sh "terraform init -input=false"
+        }
+
+      }
+    }
+
+    stage('Terraform Plan') {
+      steps {
+        echo "Creating Plan \"${params.terraformDir}\" for Terraform ...."
+
+        dir("${params.terraformDir}")
+        {
+          sh "terraform plan -out=${params.planName}"
+        }
+
+      }
+    }
+
+    stage('Apply Infrastructure') {
+      steps {
+        echo "Applying Infrastructure with Terraform ...."
+
+        dir("${params.terraformDir}")
+        {
+          sh "terraform apply ${params.planName} -input=false"
+        }
+
+      }
+    }
+
+    }
+}
