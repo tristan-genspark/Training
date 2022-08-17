@@ -16,34 +16,35 @@ the Application and Infra which is very essential for every production software 
 
 ### A Break down of the objectives
 
- -> Creating the infra using terraform  [ managed EKS cluster ]
- -> Use Jenkins for running automated CICD for the application
- -> Set up Dynatrace and Splunk to monitor the application
- -> Make it all highly portable
+ - Creating the infra using terraform  [ managed EKS cluster ]
+
+ - Use Jenkins for running automated CICD for the application
+
+ - Set up Dynatrace and Splunk to monitor the application
+
+ - Make it all highly portable
 
 
 
 ### Steps Check list and Completion
 
-  ~ = Partial Completion
+  **_[ Complete ]_** Setup Jenkins
 
-  [✔️] Setup Jenkins
-  
-  [✔️] Setup Splunk
- 
-  [✔️] Create Terraform Script to create an EKS Cluster
-  
-  [✔️] Make a Working App Deployment on Cluster where its service is accessible
-  
-  [~] Create a Pipeline in Jenkins  <= (Pipeline was created but there were small issues with permissions)
-  
-  [✔️] Monitor with Dynatrace  
-  
-  [x] Monitor with Splunk           <= (We never went over it and I ran out of time)
-  
-  [✔️] Make Terraform scripts portable and flexible
-  
-  [✔️] Make the Pipelines portable and flexible
+  **_[ Complete ]_**  Setup Splunk
+
+  **_[ Complete ]_**  Create Terraform Script to create an EKS Cluster
+
+  **_[ Complete ]_**  Make a Working App Deployment on Cluster where its service is accessible
+
+  **_[ Half Complete ]_** Create a Pipeline in Jenkins  **(Pipeline was created but there were small issues with permissions)**
+
+  **_[ Complete ]_**  Monitor with Dynatrace  
+
+  **_[ Did Not Complete ]_** Monitor with Splunk  **(We never went over it and I ran out of time)**
+
+  **_[ Complete ]_**  Make Terraform scripts portable and flexible
+
+  **_[ Complete ]_**  Make the Pipelines portable and flexible
 
  _________________________________________________
 
@@ -148,7 +149,7 @@ $ aws eks --region us-east-1 update-kubeconfig --name EKS-Cluster
 **Note:** I have learned its important to use the same IAM user used for terraform that is used for the authentication
       of kubectl or it will result in an access denied message. This is something I did that was improved from my
       previous labs.
-      
+
 _________________________________________________
 
 # Step 5 - Setting up the Infastructure through terraform
@@ -181,13 +182,13 @@ The pipeline will have a more refined version of this for the deployment
 kubectl create deployment nginx-deployment --image=nginx --port=80 --dry-run=client -o yaml > nginx-deploy.yaml
 kubectl apply -f nginx-deploy.yaml
 ```
- 
+
 ```
 kubectl expose deployment nginx-deployment  --type=ClusterIP  --name=nginx-service-cluster-ip
 kubectl expose deployment nginx-deployment  --type=NodePort  --name=nginx-service-nodeport
 kubectl expose deployment nginx-deployment  --type=LoadBalancer  --name=nginx-service-loadbalancer
 ```
- 
+
 
 _________________________________________________
 
@@ -258,5 +259,3 @@ This was because of lack of nodes to run the pod on. I resolved by adding missin
 I discovered that originally my terraform code was broken during the testing so I went back and configured my terraform scripts
 and created the cluster again with the new code. After that I made sure the size was correct so there would be no issues with resources
 and it worked fine.
-
-
