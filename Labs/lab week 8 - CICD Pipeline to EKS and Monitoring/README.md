@@ -152,9 +152,9 @@ $ aws eks --region us-east-1 update-kubeconfig --name EKS-Cluster
 
 _________________________________________________
 
-# Step 5 - Setting up the Infastructure through terraform
+# Step 5 - Setting up the Infrastructure through terraform
 
-To create the Infastrucutre using Terraform I created multiple terraform files that will create
+To create the Infrastructure using Terraform I created multiple terraform files that will create
 the virtual private cloud then the subnet within it and create an EKS cluster within it.
 
 Once created, it had a node group within the cluster and a test was done to verify it worked.
@@ -168,12 +168,16 @@ $ kubectl get nodes
 Once it worked I created a node running a test image to confirm the cluster was created correctly.
 I was able to connect from the internet to the service on the cluster.
 
+[Terrafrom Scripts Used](Infrastructure-deployment/terraform-files)
+
+[Pipeline for Infrastructure Deployment](Infrastructure-deployment/Jenkinsfile)
+
 _________________________________________________
 
 # Step 6 - Setting up the Application Deployment Jenkins Pipeline
 
 The pipeline will be an easy step by step creation of the pod and exposing it to the cluster
-For this lab I used nginx because of its natrual logs that will be useful for monitoring
+For this lab I used nginx because of its natural logs that will be useful for monitoring
 
 Here are the commands that will be executed within the pipeline to deploy the nginx application
 The pipeline will have a more refined version of this for the deployment
@@ -189,14 +193,16 @@ kubectl expose deployment nginx-deployment  --type=NodePort  --name=nginx-servic
 kubectl expose deployment nginx-deployment  --type=LoadBalancer  --name=nginx-service-loadbalancer
 ```
 
+[Refined version within the Jenkins pipeline](Application-deployment/Jenkinsfile)
 
 _________________________________________________
 
 # Step 7 - Setting up the Monitoring Tool Stack
 
 
-For connecting the EKS cluster to Dynatrace this is what I did
+### For connecting the EKS cluster to Dynatrace
 
+This is what I did
 Open up the cloud shell Connect to the EKS created
 
 ```
@@ -216,7 +222,7 @@ Also its possible to connect the AWS cloud to Dynatrace for a wider view
 I did this as well
 
 
-For Connecting Splunk to the webserver
+### For Connecting Splunk to the webserver
 
 I recall being told we would learn this but we never did and moved on to doing this lab instead.
 I tried to find out the best way to do this and I believe that its with universal forwarders but
@@ -228,32 +234,50 @@ _________________________________________________
 
 # + Addiotnal Steps to make this more portable +
 
-Adding portability to the Jenkins Pipeline
+### Adding portability to the Jenkins Pipeline
+
 I added parameters to the pipeline to make it more flexible and portable.
 When creating the pipeline under the General tab in Jenkins I checked the box for "This project is parameterized"
 I then added parameters in to the pipeline code at the top to take these values as input.
+```
 string(name: 'portNumber', defaultValue: '80', description: 'Enter the port for the service to listen on')
+```
 
 This makes it possible for the Jenkins pipelines to have changing variables per run.
 
-Adding portability to the Terraform scripts
+
+![Pipeline Portability Example](images/pipeline-portability.png)
+
+
+### Adding portability to the Terraform scripts
+
 I added variables that could be changed within the main.tf file for portability.
 removing the default option also makes it possible to have it prompt for the values.
 If changes are required for the node size or other things within the cluster or VPC it can be set within
 the variables in main.tf
+```
+variable "vpc_name" {
+  type        = string
+  description = "The name assigned to the VPC that will be created."
+  default = "Training-Lab-VPC"
+}
+```
 
 _________________________________________________
 
 
 # + Issues Experienced through this Lab +
 
-Authentication Issues while connecting to the cluster
+### Authentication Issues while connecting to the cluster
+
 While getting the cluster set up I had issues with kubectl authentication.
 After spending hours on the issue I discovered that because the cluster was created using an IAM user created for terraform
 it only had that user as the user that could authenticate for the cluster. I had to authenticate my kubectl using "aws configure"
 to use the same IAM user to have access to the cluster. Once I changed this it immediately worked.
 
-The pod status on the cluster was pending and did not end.
+
+### The pod status on the cluster was pending and did not end.
+
 I first began by checking on the pod using this command "kubectl describe pod nginx-deployment"
 This was because of lack of nodes to run the pod on. I resolved by adding missing nodes to my cluster in terraform.
 I discovered that originally my terraform code was broken during the testing so I went back and configured my terraform scripts
