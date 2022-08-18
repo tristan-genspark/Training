@@ -234,7 +234,12 @@ I could filter out HTTP OK 200 and find all the different types of response code
 For example this below could help get statistics on different non HTTP 200 Error codes and Identify the number of HTTP 500 Internal Server Error responses.
 
 ```
-source="EXAMPLE_WEBSERVER" | stats count by status | search NOT status=200
+source="EXAMPLE_WEBSERVER" host="ip-172-31-27-210.ec2.internal" | stats count by status | search NOT status=200
+```
+
+Another example is identifying the top 10 visitors of the webservice and viewing the number of requests.
+```
+source="EXAMPLE_WEBSERVER" host="ip-172-31-27-210.ec2.internal" | top 10 clientip | sort -count
 ```
 
 _________________________________________________
