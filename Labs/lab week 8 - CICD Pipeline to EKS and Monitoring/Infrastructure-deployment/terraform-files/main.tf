@@ -20,7 +20,6 @@ variable "region" {
   default = "us-west-1"
 }
 
-
 variable "vpc_name" {
   type        = string
   description = "The name assigned to the VPC that will be created."

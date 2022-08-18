@@ -245,7 +245,6 @@ string(name: 'portNumber', defaultValue: '80', description: 'Enter the port for 
 
 This makes it possible for the Jenkins pipelines to have changing variables per run.
 
-
 ![Pipeline Portability Example](images/pipeline-portability.png)
 
 
@@ -255,13 +254,8 @@ I added variables that could be changed within the main.tf file for portability.
 removing the default option also makes it possible to have it prompt for the values.
 If changes are required for the node size or other things within the cluster or VPC it can be set within
 the variables in main.tf
-```
-variable "vpc_name" {
-  type        = string
-  description = "The name assigned to the VPC that will be created."
-  default = "Training-Lab-VPC"
-}
-```
+
+![Terraform Script Portability Example](images/terraform-portability.png)
 
 _________________________________________________
 
