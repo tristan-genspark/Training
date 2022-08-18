@@ -229,6 +229,14 @@ I tried to find out the best way to do this and I believe that its with universa
 with the missing understanding of this I spent more time on other parts of this lab and if I had time
 come back to this since it would take more time to figure out.
 
+What I would do for the splunk log processing is create a dashboard to monitor the types of HTTP response codes on the server.
+I could filter out HTTP OK 200 and find all the different types of response codes that could be a problem.
+For example this below could help get statistics on different non HTTP 200 Error codes and Identify the number of HTTP 500 Internal Server Error responses.
+
+```
+source="EXAMPLE_WEBSERVER" | stats count by status | search NOT status=200
+```
+
 _________________________________________________
 
 
